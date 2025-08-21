@@ -82,7 +82,7 @@
 
     <section class="plan card">
       <div class="section-title">
-        <h2>Plan & Check‑ins</h2>
+        <h2>Foods</h2>
       </div>
       <div class="plan-actions">
         <button id="addItemBtn" class="btn">Add Food</button>
@@ -95,11 +95,6 @@
               <tr>
                 <th>✓</th>
                 <th>Food Item</th>
-                <th class="num">Plan</th>
-                <th class="num">Cal</th>
-                <th class="num">P</th>
-                <th class="num">C</th>
-                <th class="num">F</th>
                 <th></th>
               </tr>
             </thead>
@@ -107,13 +102,14 @@
             <tfoot>
               <tr class="totals-row">
                 <td></td>
-                <td><strong>Totals</strong></td>
-                <td class="num" id="totalPlannedServings">0</td>
-                <td class="num" id="totalCalories">0</td>
-                <td class="num" id="totalProtein">0</td>
-                <td class="num" id="totalCarbs">0</td>
-                <td class="num" id="totalFat">0</td>
-                <td></td>
+                <td colspan="2">
+                  <div class="totals-inline">
+                    kcal <span id="totalCalories">0</span>
+                    • P <span id="totalProtein">0</span>
+                    • C <span id="totalCarbs">0</span>
+                    • F <span id="totalFat">0</span>
+                  </div>
+                </td>
               </tr>
             </tfoot>
           </table>
@@ -162,21 +158,16 @@
       <td class="check">
         <input type="checkbox" class="eat-check" />
       </td>
-      <td class="name"></td>
-      <td class="num">
+      <td class="name">
+        <div class="name-title"></div>
+        <div class="name-macros"></div>
+      </td>
+      <td class="row-actions">
         <div class="servings-control">
           <button type="button" class="minus btn-ghost">−</button>
           <input type="number" step="0.25" min="0" class="planned" />
           <button type="button" class="plus btn-ghost">+</button>
         </div>
-      </td>
-      <td class="num kcal"></td>
-      <td class="num prot"></td>
-      <td class="num carbs"></td>
-      <td class="num fat"></td>
-      <td class="row-actions">
-        <button type="button" class="btn-ghost consume-half">50%</button>
-        <button type="button" class="btn-ghost consume-full">100%</button>
         <button type="button" class="btn-ghost remove">✕</button>
       </td>
     </tr>

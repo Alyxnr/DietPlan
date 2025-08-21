@@ -169,16 +169,15 @@
         const row = rowTpl.content.firstElementChild.cloneNode(true);
         row.dataset.id = item.id;
 
-        const nameCell = row.querySelector('.name');
-        nameCell.textContent = item.name;
+        const nameTitle = row.querySelector('.name-title');
+        const nameMacros = row.querySelector('.name-macros');
+        nameTitle.textContent = item.name;
+        nameMacros.textContent = `kcal ${item.calories} • P ${item.protein} • C ${item.carbs} • F ${item.fat}`;
 
         const plannedInput = row.querySelector('input.planned');
         plannedInput.value = item.plannedServings;
 
-        row.querySelector('.kcal').textContent = item.calories;
-        row.querySelector('.prot').textContent = item.protein;
-        row.querySelector('.carbs').textContent = item.carbs;
-        row.querySelector('.fat').textContent = item.fat;
+        // macros now displayed under name; no separate cells
 
         const eatCheck = row.querySelector('.eat-check');
         eatCheck.checked = item.consumedServings > 0;
@@ -195,7 +194,8 @@
       qs('#totalProtein').textContent = round1(totals.protein);
       qs('#totalCarbs').textContent = round1(totals.carbs);
       qs('#totalFat').textContent = round1(totals.fat);
-      qs('#totalPlannedServings').textContent = round1(totals.plannedServings);
+      const plannedEl = qs('#totalPlannedServings');
+      if (plannedEl) plannedEl.textContent = round1(totals.plannedServings);
 
       // progress bars
       const kinds = [

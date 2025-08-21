@@ -367,11 +367,15 @@ body {
   z-index: 9;
 }
 
-.items-table .num {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  min-width: 50px;
+.totals-inline {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  color: var(--text-secondary);
 }
+
+.items-table .num { text-align: right; font-variant-numeric: tabular-nums; min-width: 50px; }
 
 .items-table .check {
   text-align: center;
@@ -384,6 +388,16 @@ body {
   font-weight: 500;
   white-space: normal;
   word-break: break-word;
+}
+
+.name .name-title {
+  font-weight: 600;
+}
+
+.name .name-macros {
+  margin-top: 2px;
+  color: var(--text-secondary);
+  font-size: 12px;
 }
 
 /* Custom Checkbox */
@@ -468,7 +482,7 @@ body {
 /* Row Actions */
 .row-actions {
   display: flex;
-  gap: 4px;
+  gap: 8px;
   justify-content: flex-end;
   flex-wrap: wrap;
 }
