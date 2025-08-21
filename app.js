@@ -360,6 +360,9 @@
       qs('#addItemBtn').addEventListener('click', () => {
         form.reset();
         form.elements['plannedServings'].value = 1;
+        // Ensure Save to Library is visually checked
+        const saveCb = form.elements['saveToLibrary'];
+        if (saveCb && saveCb.type === 'checkbox') saveCb.checked = true;
         dialog.showModal();
       });
       

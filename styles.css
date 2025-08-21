@@ -561,6 +561,16 @@ input[type="date"]:focus {
   -webkit-appearance: none;
 }
 
+/* Restore native checkbox look inside dialog */
+.dialog-body input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+  padding: 0;
+  border: none;
+  background: transparent;
+  accent-color: var(--accent-2);
+}
+
 .dialog-body input:focus {
   outline: none;
   border-color: var(--accent);
