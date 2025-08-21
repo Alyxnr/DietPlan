@@ -188,5 +188,24 @@ body {
   .eat-check::before { font-size: 16px; }
 }
 
+@media (max-width: 400px) {
+  .app-header { flex-direction: column; align-items: flex-start; padding: 8px 4px; }
+  .brand h1 { font-size: 16px; }
+  .header-actions { flex-direction: column; gap: 6px; width: 100%; }
+  .container { padding: 4px; gap: 8px; }
+  .card { padding: 8px; }
+  .targets-grid { grid-template-columns: 1fr; gap: 6px; }
+  .progress-row { grid-template-columns: 1fr; gap: 4px; }
+  .items-table { font-size: 12px; }
+  .items-table .name { min-width: 100px; }
+  .items-table th, .items-table td { padding: 6px 4px; }
+  .servings-control input { width: 48px; padding: 6px; }
+  .btn, .btn-secondary, .btn-danger, .btn-ghost { padding: 10px 0; font-size: 14px; min-width: 44px; min-height: 44px; }
+  .eat-check { width: 20px; height: 20px; }
+  .eat-check::before { font-size: 13px; }
+  .dialog-body { width: 98vw; min-width: 0; padding: 4px; }
+  .two-col { grid-template-columns: 1fr; gap: 6px; }
+}
+
 /* remove Tools section from UI */
 .tools { display: none !important; } 
