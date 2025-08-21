@@ -131,6 +131,8 @@ body {
   justify-content: space-between;
   padding: 16px 16px 12px;
   background: var(--card-secondary);
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .section-title h2 {
@@ -206,6 +208,11 @@ body {
   padding: 0;
 }
 
+/* Avoid clipping buttons/inputs in targets card */
+.targets.card {
+  overflow: visible;
+}
+
 .targets-content {
   padding: 16px;
 }
@@ -224,6 +231,7 @@ body {
   font-size: 14px;
   color: var(--text-secondary);
   font-weight: 500;
+  min-width: 0;
 }
 
 .targets-grid input {
@@ -235,6 +243,7 @@ body {
   font-size: 17px;
   appearance: none;
   -webkit-appearance: none;
+  width: 100%;
 }
 
 .targets-grid input:focus {
@@ -620,6 +629,17 @@ input[type="date"]:focus {
     gap: 6px;
   }
 
+  /* Put target actions under the section title on small screens */
+  .targets .section-title {
+    align-items: flex-start;
+  }
+  .targets .target-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
   .btn, .btn-secondary, .btn-danger {
     font-size: 15px;
     padding: 0 12px;
@@ -681,6 +701,13 @@ input[type="date"]:focus {
 
   .dialog-body {
     padding: 16px;
+  }
+}
+
+/* iPhone 13 Pro width safety: switch to single column if tight */
+@media (max-width: 390px) {
+  .targets-grid {
+    grid-template-columns: 1fr;
   }
 }
 
