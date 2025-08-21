@@ -319,6 +319,7 @@ body {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 /* Table */
@@ -361,6 +362,9 @@ body {
   font-weight: 600;
   background: var(--card-secondary);
   border-top: 1px solid var(--separator);
+  position: sticky;
+  bottom: 0;
+  z-index: 9;
 }
 
 .items-table .num {
@@ -376,8 +380,10 @@ body {
 }
 
 .items-table .name {
-  min-width: 180px;
+  min-width: 140px;
   font-weight: 500;
+  white-space: normal;
+  word-break: break-word;
 }
 
 /* Custom Checkbox */
@@ -683,12 +689,17 @@ input[type="date"]:focus {
   }
 
   .items-table .name {
-    min-width: 140px;
+    min-width: 120px;
   }
 
   .items-table .check {
     width: 50px;
   }
+
+  /* Hide Fat column on small screens */
+  .items-table thead th:nth-child(7),
+  .items-table tbody td:nth-child(7),
+  .items-table tfoot td:nth-child(7) { display: none; }
 
   .eat-check {
     width: 28px;
@@ -725,6 +736,10 @@ input[type="date"]:focus {
   .targets-grid {
     grid-template-columns: 1fr;
   }
+  /* Hide Carbs column as well on very narrow widths */
+  .items-table thead th:nth-child(6),
+  .items-table tbody td:nth-child(6),
+  .items-table tfoot td:nth-child(6) { display: none; }
 }
 
 /* Hide scrollbar on webkit */
