@@ -517,7 +517,7 @@ input[type="date"]:focus {
   color: var(--text);
   max-width: calc(100vw - 32px);
   width: 400px;
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - 2 * var(--safe-area-top) - 24px);
   overflow: hidden;
 }
 
@@ -531,7 +531,8 @@ input[type="date"]:focus {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 20px;
+  padding: 20px 20px 12px;
+  overflow: auto;
 }
 
 .dialog-body h3 {
@@ -589,6 +590,11 @@ input[type="date"]:focus {
   justify-content: flex-end;
   gap: 12px;
   margin-top: 8px;
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(to top, var(--card), rgba(0,0,0,0));
+  padding-top: 8px;
+  padding-bottom: calc(8px + var(--safe-area-bottom));
 }
 
 /* Responsive adjustments for iPhone 13 Pro */

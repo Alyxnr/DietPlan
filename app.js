@@ -8,7 +8,7 @@
       theme: 'dt_v1_theme',
       day: (dateStr) => `dt_v1_day_${dateStr}`,
     };
-
+ 
     // Defaults
     const DEFAULT_TARGETS = { calories: 2000, protein: 160, carbs: 165, fat: 41 };
 
@@ -379,7 +379,8 @@
         state.day.items.push(item);
         saveDay(state.day);
 
-        if (data.saveToLibrary === 'on') {
+        // Always save to library
+        {
           const exists = state.library.some((x) => x.name.toLowerCase() === entry.name.toLowerCase());
           if (!exists) {
             state.library.push(entry);
