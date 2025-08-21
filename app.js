@@ -400,39 +400,44 @@
         dialog.close();
       });
 
-      // Template
-      qs('#saveTemplateBtn').addEventListener('click', () => {
-        const template = state.day.items.map((it) => ({
-          name: it.name,
-          calories: it.calories,
-          protein: it.protein,
-          carbs: it.carbs,
-          fat: it.fat,
-          plannedServings: it.plannedServings,
-        }));
-        saveJson(STORAGE_KEYS.template, template);
-        const btn = qs('#saveTemplateBtn');
-        const originalText = btn.textContent;
-        btn.textContent = 'Saved!';
-        setTimeout(() => btn.textContent = originalText, 1000);
-      });
+      // Template buttons removed from UI; guard old handlers
+      const saveTplBtn = qs('#saveTemplateBtn');
+      if (saveTplBtn) {
+        saveTplBtn.addEventListener('click', () => {
+          const template = state.day.items.map((it) => ({
+            name: it.name,
+            calories: it.calories,
+            protein: it.protein,
+            carbs: it.carbs,
+            fat: it.fat,
+            plannedServings: it.plannedServings,
+          }));
+          saveJson(STORAGE_KEYS.template, template);
+          const originalText = saveTplBtn.textContent;
+          saveTplBtn.textContent = 'Saved!';
+          setTimeout(() => saveTplBtn.textContent = originalText, 1000);
+        });
+      }
 
-      qs('#loadTemplateBtn').addEventListener('click', () => {
-        const template = loadJson(STORAGE_KEYS.template, null);
-        if (!template) {
-          alert('No template found. Save a template first.');
-          return;
-        }
-        if (confirm('Load template? This will replace current items.')) {
-          state.day.items = template.map((t) => {
-            const it = makeItemFromLibraryEntry(t);
-            it.plannedServings = Number(t.plannedServings || 1);
-            return it;
-          });
-          saveDay(state.day);
-          renderItemsTable();
-        }
-      });
+      const loadTplBtn = qs('#loadTemplateBtn');
+      if (loadTplBtn) {
+        loadTplBtn.addEventListener('click', () => {
+          const template = loadJson(STORAGE_KEYS.template, null);
+          if (!template) {
+            alert('No template found. Save a template first.');
+            return;
+          }
+          if (confirm('Load template? This will replace current items.')) {
+            state.day.items = template.map((t) => {
+              const it = makeItemFromLibraryEntry(t);
+              it.plannedServings = Number(t.plannedServings || 1);
+              return it;
+            });
+            saveDay(state.day);
+            renderItemsTable();
+          }
+        });
+      }
 
       // Reset day
       qs('#resetDayBtn').addEventListener('click', () => {
