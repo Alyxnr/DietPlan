@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Diet Tracker — Macro Check‑ins</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">🍽️</div>
+      <h1>Diet Tracker</h1>
+    </div>
+    <div class="header-actions">
+      <input id="datePicker" type="date" />
+      <button id="todayBtn" class="btn">Today</button>
+      <button id="themeToggle" class="btn" title="Toggle theme">🌓</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="targets card">
+      <div class="section-title">
+        <h2>Daily Targets</h2>
+        <div class="target-actions">
+          <button id="saveTargetsBtn" class="btn btn-secondary">Save as Default</button>
+          <button id="resetTargetsBtn" class="btn btn-secondary">Reset</button>
+        </div>
+      </div>
+      <div class="targets-grid">
+        <label>Calories
+          <input id="targetCalories" type="number" min="0" step="10" />
+        </label>
+        <label>Protein (g)
+          <input id="targetProtein" type="number" min="0" step="1" />
+        </label>
+        <label>Carbs (g)
+          <input id="targetCarbs" type="number" min="0" step="1" />
+        </label>
+        <label>Fat (g)
+          <input id="targetFat" type="number" min="0" step="0.5" />
+        </label>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-row">
+          <span>Calories</span>
+          <div class="progress-bar" data-kind="calories"><div class="bar"></div></div>
+          <span class="progress-value" data-kind="calories"></span>
+        </div>
+        <div class="progress-row">
+          <span>Protein</span>
+          <div class="progress-bar" data-kind="protein"><div class="bar"></div></div>
+          <span class="progress-value" data-kind="protein"></span>
+        </div>
+        <div class="progress-row">
+          <span>Carbs</span>
+          <div class="progress-bar" data-kind="carbs"><div class="bar"></div></div>
+          <span class="progress-value" data-kind="carbs"></span>
+        </div>
+        <div class="progress-row">
+          <span>Fat</span>
+          <div class="progress-bar" data-kind="fat"><div class="bar"></div></div>
+          <span class="progress-value" data-kind="fat"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="plan card">
+      <div class="section-title">
+        <h2>Plan & Check‑ins</h2>
+        <div class="plan-actions">
+          <button id="addItemBtn" class="btn">Add Food</button>
+          <button id="saveTemplateBtn" class="btn btn-secondary">Save Template</button>
+          <button id="loadTemplateBtn" class="btn btn-secondary">Load Template</button>
+          <button id="resetDayBtn" class="btn btn-danger">Reset Day</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Eaten</th>
+              <th>Food Item</th>
+              <th class="num">Plan</th>
+              <th class="num">kcal</th>
+              <th class="num">P</th>
+              <th class="num">C</th>
+              <th class="num">F</th>
+              <th class="num">Consumed</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="itemsTbody"></tbody>
+          <tfoot>
+            <tr class="totals-row">
+              <td></td>
+              <td>Totals</td>
+              <td class="num" id="totalPlannedServings">0</td>
+              <td class="num" id="totalCalories">0</td>
+              <td class="num" id="totalProtein">0</td>
+              <td class="num" id="totalCarbs">0</td>
+              <td class="num" id="totalFat">0</td>
+              <td class="num" id="totalConsumed">0</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section class="tools card">
+      <div class="section-title">
+        <h2>Tools</h2>
+      </div>
+      <div class="tools-grid">
+        <button id="exportBtn" class="btn">Export JSON</button>
+        <label class="import-label btn">
+          Import JSON
+          <input id="importInput" type="file" accept="application/json" hidden />
+        </label>
+        <button id="printBtn" class="btn btn-secondary">Print Summary</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="itemDialog">
+    <form method="dialog" id="itemForm" class="dialog-body">
+      <h3>Add Food</h3>
+      <label>Name
+        <input name="name" type="text" required />
+      </label>
+      <div class="two-col">
+        <label>Calories
+          <input name="calories" type="number" min="0" step="1" required />
+        </label>
+        <label>Protein (g)
+          <input name="protein" type="number" min="0" step="0.1" required />
+        </label>
+        <label>Carbs (g)
+          <input name="carbs" type="number" min="0" step="0.1" required />
+        </label>
+        <label>Fat (g)
+          <input name="fat" type="number" min="0" step="0.1" required />
+        </label>
+        <label>Planned Servings
+          <input name="plannedServings" type="number" min="0" step="0.25" value="1" />
+        </label>
+      </div>
+      <label class="checkbox">
+        <input name="saveToLibrary" type="checkbox" checked /> Save to Library
+      </label>
+      <menu class="dialog-actions">
+        <button value="cancel" class="btn btn-secondary">Cancel</button>
+        <button value="default" class="btn">Add</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <template id="rowTemplate">
+    <tr>
+      <td class="check">
+        <input type="checkbox" class="eat-check" />
+      </td>
+      <td class="name"></td>
+      <td class="num">
+        <div class="servings-control">
+          <button class="minus btn-ghost" title="-0.5">−</button>
+          <input type="number" step="0.25" min="0" class="planned" />
+          <button class="plus btn-ghost" title="+0.5">+</button>
+        </div>
+      </td>
+      <td class="num kcal"></td>
+      <td class="num prot"></td>
+      <td class="num carbs"></td>
+      <td class="num fat"></td>
+      <td class="num consumed"></td>
+      <td class="row-actions">
+        <button class="btn-ghost consume-half" title="Consumed 50%">50%</button>
+        <button class="btn-ghost consume-full" title="Consumed 100%">100%</button>
+        <button class="btn-ghost remove" title="Remove">✕</button>
+      </td>
+    </tr>
+  </template>
+
+  <script src="app.js" defer></script>
+</body>
+</html> 
